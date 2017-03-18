@@ -42,3 +42,4 @@ public class DataBinderTestController
 		binder.registerCustomEditor(PhoneNumberModel.class, new PhoneNumberEditor());
 	}
 }
+
