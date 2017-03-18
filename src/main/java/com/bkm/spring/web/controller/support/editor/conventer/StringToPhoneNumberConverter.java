@@ -7,7 +7,7 @@ import org.springframework.util.StringUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//String----->PhoneNumberModel
+//String--->PhoneNumberModel
 public class StringToPhoneNumberConverter implements Converter<String, PhoneNumberModel> {
 
 	Pattern pattern = Pattern.compile("^(\\d{3,4})-(\\d{7,8})$");
