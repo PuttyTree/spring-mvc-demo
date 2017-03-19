@@ -22,6 +22,8 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController
 {
+    private Logger log = Logger.getLogger(UserController.class);
+
     @Resource
     private UserService userService;
 
@@ -39,8 +41,16 @@ public class UserController
     @RequestMapping("/showUser")
     @ResponseBody
     public String showUser(Model model){
-        List<User> list = this.userService.getAllUsers();
+        try{
+            List<User> list = this.userService.getAllUsers();
         /*Map<String,Object> map = new HashMap<String, Object>();*/
-        return "success";
+            return "success";
+
+        }catch (Exception e){
+            System.out.println(e);
+            return "failure";
+
+        }
+
     }
 }
