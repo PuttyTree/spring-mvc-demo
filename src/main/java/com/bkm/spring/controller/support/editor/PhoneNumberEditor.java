@@ -1,4 +1,4 @@
-package com.bkm.spring.web.controller.support.editor;
+package com.bkm.spring.controller.support.editor;
 
 import com.bkm.spring.model.PhoneNumberModel;
 import org.springframework.util.StringUtils;

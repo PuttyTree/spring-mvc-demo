@@ -1,4 +1,4 @@
-package com.bkm.spring.web.controller;
+package com.bkm.spring.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +37,7 @@ public class ResponseContentTypeController
     }
 
 
-  /*  @RequestMapping(value = "/response/ContentType", headers = "Accept=application/json")
+   @RequestMapping(value = "/response/ContentType", headers = "Accept=application/json")
     @ResponseBody
     public Map response2(HttpServletResponse response) throws IOException
     {
@@ -53,7 +53,7 @@ public class ResponseContentTypeController
 
     }
 
-    @RequestMapping(value = "/response/ContentType", headers = "Accept=application/xml")
+   /*  @RequestMapping(value = "/response/ContentType", headers = "Accept=application/xml")
     @ResponseBody
     public void response3(HttpServletResponse response) throws IOException
     {

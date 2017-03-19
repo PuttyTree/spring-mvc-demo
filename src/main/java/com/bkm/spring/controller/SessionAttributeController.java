@@ -1,4 +1,4 @@
-package com.bkm.spring.web.controller;
+package com.bkm.spring.controller;
 
 import com.bkm.spring.model.UserModel;
 import org.springframework.stereotype.Controller;

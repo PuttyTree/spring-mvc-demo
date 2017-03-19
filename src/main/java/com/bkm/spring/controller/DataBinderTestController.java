@@ -1,9 +1,9 @@
-package com.bkm.spring.web.controller;
+package com.bkm.spring.controller;
 
 
 import com.bkm.spring.model.DataBinderTestModel;
 import com.bkm.spring.model.PhoneNumberModel;
-import com.bkm.spring.web.controller.support.editor.PhoneNumberEditor;
+import com.bkm.spring.controller.support.editor.PhoneNumberEditor;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
