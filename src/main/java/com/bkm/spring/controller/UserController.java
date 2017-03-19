@@ -40,7 +40,7 @@ public class UserController
     @ResponseBody
     public String showUser(Model model){
         List<User> list = this.userService.getAllUsers();
-        Map<String,Object> map = new HashMap<String, Object>();
+        /*Map<String,Object> map = new HashMap<String, Object>();*/
         return "success";
     }
 }
