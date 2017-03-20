@@ -1,4 +1,4 @@
-package com.bkm.spring.web.controller;
+package com.bkm.spring.controller;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.ClientHttpRequest;
