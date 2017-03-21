@@ -1,8 +1,10 @@
 package com;
 
-import com.test.model.Boss;
+import com.test.service.IUserService;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -13,25 +15,32 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
  */
 public class main
 {
-    public DriverManagerDataSource getMysqlDataSource()
+    private static ApplicationContext ctx = null;
+
+    @BeforeClass //表示在所以测试方法之前执行，且只执行一次。
+    public static void onlyOnce()
     {
-        //1.首先启动mysql（本书使用5.4.3版本），其次登录mysql创建test数据库
-        String url = "jdbc:mysql://localhost:3306/test";
-        //在进行测试前，请下载并添加mysql-connector-java-5.1.10.jar到classpath
-        DriverManagerDataSource dataSource = new DriverManagerDataSource(url, "root", "123456");
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        return dataSource;
+        ctx = new ClassPathXmlApplicationContext("classpath:applicationContext-jdbc.xml");
     }
 
+    @Test
+    public void testSave()
+    {
+        IUserService service = ctx.getBean("userService", IUserService.class);
+        service.saveUser();
+    }
 
     @Test
-    public void test()
+    public void testSaveThrowException() throws Exception
     {
-       /* ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring-mvc-test.xml");
+        IUserService service = ctx.getBean("userService", IUserService.class);
+        service.saveUserThrowException();
+    }
 
-        Boss boss = ctx.getBean(Boss.class);
-        System.out.println(boss.toString());
-        ctx.destroy();*/
-        JdbcTemplate mysqlJdbcTemplate = new JdbcTemplate(this.getMysqlDataSource());
+    @Test
+    public void testJDBCDaoQuery()
+    {
+        IUserService service = ctx.getBean("userService", IUserService.class);
+        service.findUsers();
     }
 }

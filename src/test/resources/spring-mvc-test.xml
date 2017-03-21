@@ -10,15 +10,28 @@
                         http://www.springframework.org/schema/tx
                         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:annotation-config/>
-    <!-- 移除 boss Bean 的属性注入配置的信息 -->
-    <bean id="boss" class="com.test.model.Boss"/>
+    <import resource="spring-mvc-test.xml"/>
 
-    <bean id="office" class="com.test.model.Office">
-        <property name="officeNo" value="001"/>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="car" class="com.test.model.Car" scope="singleton">
-        <property name="brand" value=" 红旗 CA72"/>
-        <property name="price" value="2000"/>
+
+    <!-- 首先定义抽象的abstractDao，其有一个jdbcTemplate属性，从而可以让继承的子类自动继承jdbcTemplate属性注入； -->
+    <bean id="abstractDao" abstract="true">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>
+
+    <bean id="userDao" class="com.test.dao.impl.UserDaoImpl"
+          parent="abstractDao"/>
+
+    <bean id="userService" class="com.test.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+
+    <bean id="txManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager"/>
 </beans>

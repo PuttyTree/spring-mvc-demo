@@ -115,7 +115,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.0.28</version>
+            <version>1.0.11</version>
         </dependency>
         <!-- 添加数据库连接池依赖 -->
         <dependency>
