@@ -1,5 +1,7 @@
 package com;
 
+import com.test.dao.IUserDao;
+import com.test.model.User;
 import com.test.service.IUserService;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -9,18 +11,29 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import java.util.List;
+
 
 /**
  * Created by Administrator on 2017/3/19.
  */
 public class main
 {
-    private static ApplicationContext ctx = null;
+    private  ApplicationContext ctx = null;
 
-    @BeforeClass //表示在所以测试方法之前执行，且只执行一次。
-    public static void onlyOnce()
+    /*@BeforeClass *///表示在所以测试方法之前执行，且只执行一次。
+    public  void onlyOnce()
     {
-        ctx = new ClassPathXmlApplicationContext("classpath:applicationContext-jdbc.xml");
+        try
+        {
+            String[] configLocations = new String[]{"classpath:spring-mvc-test.xml"};
+            this.ctx = new ClassPathXmlApplicationContext(configLocations);
+        }
+        catch (Exception e)
+        {
+
+        }
+
     }
 
     @Test
@@ -40,7 +53,19 @@ public class main
     @Test
     public void testJDBCDaoQuery()
     {
-        IUserService service = ctx.getBean("userService", IUserService.class);
-        service.findUsers();
+        try
+        {
+            String[] configLocations = new String[]{"classpath:Application.xml"};
+            ApplicationContext  ctx = new ClassPathXmlApplicationContext(configLocations);
+            /*IUserService service = ctx.getBean("userService", IUserService.class);
+            service.findUsers();*/
+            IUserDao userDao = ctx.getBean(IUserDao.class);
+            List<User> list = userDao.query("select * from t_user where age>?", new Object[]{17});
+        }
+        catch (Exception e)
+        {
+
+        }
+
     }
 }

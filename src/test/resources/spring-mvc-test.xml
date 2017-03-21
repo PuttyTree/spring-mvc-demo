@@ -10,7 +10,6 @@
                         http://www.springframework.org/schema/tx
                         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <import resource="spring-mvc-test.xml"/>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"/>
@@ -21,17 +20,17 @@
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>
 
-    <bean id="userDao" class="com.test.dao.impl.UserDaoImpl"
-          parent="abstractDao"/>
+     <bean id="userDao" class="com.test.dao.impl.UserDaoImpl"
+           parent="abstractDao"/>
 
-    <bean id="userService" class="com.test.service.impl.UserServiceImpl">
-        <property name="userDao" ref="userDao"></property>
-    </bean>
+    <!-- <bean id="userService" class="com.test.service.impl.UserServiceImpl">
+         <property name="userDao" ref="userDao"></property>
+     </bean>-->
 
-    <bean id="txManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+      <bean id="txManager"
+           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+         <property name="dataSource" ref="dataSource"/>
+     </bean>
 
-    <tx:annotation-driven transaction-manager="txManager"/>
+     <tx:annotation-driven transaction-manager="txManager"/>
 </beans>

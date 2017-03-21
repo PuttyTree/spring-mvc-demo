@@ -54,7 +54,7 @@ public class UserServiceImpl implements IUserService
     @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
     public void findUsers()
     {
-        List<User> users = userDao.query("select * from user where age>?", new Object[]{17});
+        List<User> users = userDao.query("select * from t_user where age>?", new Object[]{17});
         for (User user : users)
         {
             System.out.println(user);

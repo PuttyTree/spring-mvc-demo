@@ -9,13 +9,41 @@
                         http://www.springframework.org/schema/tx
                         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <!--    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+              init-method="init" destroy-method="close">
+            <property name="url"
+                      value="jdbc:mysql://127.0.0.1:3306/test?zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true&amp;useUnicode\
+      =true&amp;characterEncoding=utf-8" />
+            <property name="username" value="root" />
+            <property name="password" value="123456" />
+            <property name="initialSize" value="1" />
+            <property name="maxActive" value="20" />
+        </bean>-->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jdbc.properties"/>
+    </bean>
+
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
-        <property name="url" value="jdbc:mysql://localhost:3306/test" />
-        <property name="username" value="root" />
-        <property name="password" value="123456" />
-        <property name="initialSize" value="1" />
-        <property name="maxActive" value="20" />
+        <property name="driverClassName" value="${jdbc.driverClass}"/>
+        <property name="url" value="${jdbc.adb.master.url}"/>
+        <property name="username" value="${jdbc.adb.master.username}"/>
+        <property name="password" value="${jdbc.adb.master.password}"/>
+       <!-- <property name="initialSize" value="10"/>-->
+        <!--配置获取连接等待超时的时间-->
+       <!-- <property name="maxWait" value="60000"/>
+        <property name="maxIdle" value="15"/>
+        <property name="maxActive" value="20"/>
+        <property name="validationQuery" value="select 1;"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="numTestsPerEvictionRun" value="10"/>
+        <property name="timeBetweenEvictionRunsMillis" value="10000"/>
+        <property name="minEvictableIdleTimeMillis" value="60000"/>
+        <property name="logAbandoned" value="true"/>
+        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandonedTimeout" value="180"/>-->
+
     </bean>
 
 </beans>
