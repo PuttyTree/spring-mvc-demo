@@ -53,19 +53,15 @@ public class main
     @Test
     public void testJDBCDaoQuery()
     {
-        try
-        {
-            String[] configLocations = new String[]{"classpath:Application.xml"};
-            ApplicationContext  ctx = new ClassPathXmlApplicationContext(configLocations);
-            /*IUserService service = ctx.getBean("userService", IUserService.class);
-            service.findUsers();*/
-            IUserDao userDao = ctx.getBean(IUserDao.class);
-            List<User> list = userDao.query("select * from t_user where age>?", new Object[]{17});
-        }
-        catch (Exception e)
-        {
 
-        }
+            String[] configLocations = new String[]{"classpath:application.xml"};
+            ApplicationContext  ctx = new ClassPathXmlApplicationContext(configLocations);
+            IUserService service = ctx.getBean("userService", IUserService.class);
+            service.findUsers();
+            /*IUserDao userDao = ctx.getBean(IUserDao.class);
+            List<User> list = userDao.query("select * from t_user where age>?", new Object[]{17});
+            System.out.println("--------------------------sdfsdf");
+            System.out.println(list);*/
 
     }
 }

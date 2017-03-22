@@ -14,6 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements IUserService
 {
     private IUserDao userDao;
+    public IUserDao getUserDao(){
+        return this.userDao;
+    }
+    public void setUserDao(IUserDao userDao){
+        this.userDao = userDao;
+    }
+
 
     public void saveUser()
     {
