@@ -19,21 +19,13 @@ import java.util.List;
  */
 public class main
 {
-    private  ApplicationContext ctx = null;
+    private static ApplicationContext ctx = null;
 
-    /*@BeforeClass *///表示在所以测试方法之前执行，且只执行一次。
-    public  void onlyOnce()
+    @BeforeClass //表示在所以测试方法之前执行，且只执行一次。
+    public static void onlyOnce()
     {
-        try
-        {
-            String[] configLocations = new String[]{"classpath:spring-mvc-test.xml"};
-            this.ctx = new ClassPathXmlApplicationContext(configLocations);
-        }
-        catch (Exception e)
-        {
-
-        }
-
+        String[] configLocations = new String[]{"classpath:application.xml"};
+        ctx = new ClassPathXmlApplicationContext(configLocations);
     }
 
     @Test
@@ -54,10 +46,9 @@ public class main
     public void testJDBCDaoQuery()
     {
 
-            String[] configLocations = new String[]{"classpath:application.xml"};
-            ApplicationContext  ctx = new ClassPathXmlApplicationContext(configLocations);
-            IUserService service = ctx.getBean("userService", IUserService.class);
-            service.findUsers();
+
+        IUserService service = ctx.getBean("userService", IUserService.class);
+        service.findUsers();
             /*IUserDao userDao = ctx.getBean(IUserDao.class);
             List<User> list = userDao.query("select * from t_user where age>?", new Object[]{17});
             System.out.println("--------------------------sdfsdf");

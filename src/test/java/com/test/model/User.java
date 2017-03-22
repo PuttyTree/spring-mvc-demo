@@ -22,7 +22,7 @@ public class User implements Serializable
         return  this.name;
     }
     public void setName(String name){
-        this.name = this.name;
+        this.name = name;
     }
     public Integer getAge(){
         return this.age;
