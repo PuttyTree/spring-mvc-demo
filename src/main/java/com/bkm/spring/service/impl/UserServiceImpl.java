@@ -3,6 +3,8 @@ package com.bkm.spring.service.impl;
 import com.bkm.spring.dao.UserDao;
 import com.bkm.spring.model.User;
 import com.bkm.spring.service.UserService;
+import com.bkm.spring.tuser.entity.TUser;
+import com.bkm.spring.tuser.mapper.TUserMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,6 +37,7 @@ public class UserServiceImpl implements UserService
     public  int insert(int id,String name,String phone){
         return this.userDao.insert(id,name,phone);
     }
+
 }
 
 

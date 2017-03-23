@@ -9,8 +9,7 @@ import java.util.List;
  * Created by Administrator on 2017/3/19.
  */
 
-public interface UserService
-{
+public interface UserService{
     List<User> getAllUsers();
 
     User getUserByPhoneOrEmail(String emailOrPhone);
