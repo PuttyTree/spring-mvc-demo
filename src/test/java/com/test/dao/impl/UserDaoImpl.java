@@ -1,6 +1,6 @@
 package com.test.dao.impl;
 
-import com.test.dao.IUserDao;
+import com.test.dao.UserDao;
 import com.test.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/3/21.
  */
-public class UserDaoImpl extends JdbcDaoSupport implements IUserDao
+public class UserDaoImpl extends JdbcDaoSupport implements UserDao
 {
 
     class UserRowMapper implements RowMapper<User>
@@ -35,8 +35,6 @@ public class UserDaoImpl extends JdbcDaoSupport implements IUserDao
     }
 
     public List<User> query(String sql, Object[] args) {
-        JdbcTemplate jdbc = getJdbcTemplate();
-        List<User> list = jdbc.query(sql, args, new UserRowMapper());
-        return list;
+        return getJdbcTemplate().query(sql, args, new UserRowMapper());
     }
 }
