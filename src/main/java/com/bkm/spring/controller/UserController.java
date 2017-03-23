@@ -30,54 +30,31 @@ import com.bkm.spring.gson.GsonEnumTypeAdapter;
 public class UserController
 {
     private Logger logger = Logger.getLogger(UserController.class);
-
-    private Gson gson = new GsonBuilder().serializeNulls().registerTypeAdapter(ErrorCode.class, new GsonEnumTypeAdapter(ErrorCode.SUCCESS)).setDateFormat("yyyy-MM-dd HH:mm:ss").create();
     @Resource
     private UserService userService;
 
-    /* private Logger log = Logger.getLogger(UserController.class);
-     @Resource
-     private UserService userService;
-
-     @RequestMapping("/showUser")
-     public String showUser(HttpServletRequest request, Model model){
-         log.info("查询所有用户信息");
-         List<User> userList = userService.getAllUser();
-         model.addAttribute("userList",userList);
-         return "showUser";
-     }*/
     @RequestMapping("/showUser")
-    @ResponseBody
-    public Map showUser(Model model)
-    {
+    public @ResponseBody Map showUser(){
         Map<String, Object> map = new HashMap<String, Object>();
-        try
-        {
+        try{
             List<User> list = this.userService.getAllUsers();
             map.put("status", 0);
             map.put("data", list);
             return map;
         }
-        catch (Exception e)
-        {
-
+        catch (Exception e){
             logger.fatal(e);
             logger.error(String.format("%s  %s ", ErrorCode.BIZ_ERROR.getMsg(), e.getMessage()));
             map.put("status", -1);
-            System.out.println(e);
             return map;
-
         }
 
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public @ResponseBody ApiResponse addUser(User user)
-    {
-        try
-        {
-            if (user == null || user.getId() < 1)
-            {
+    public @ResponseBody ApiResponse addUser(User user){
+        try{
+            if (user == null || user.getId() < 1){
                 return ApiResponse.fail(ErrorCode.INVALID_REQUEST_PARAMETER_COUNT,"不正确的ID");
             }
             int index = this.userService.insert(user.getId(), user.getName(), user.getPhone());
@@ -88,10 +65,8 @@ public class UserController
             map.put("index", index);
             return ApiResponse.success(map).setMsg(new String[]{"添加数据成功"});
         }
-        catch (Exception e)
-        {
+        catch (Exception e){
             return ApiResponse.fail(ErrorCode.BIZ_ERROR,e.getMessage());
-
         }
 
     }

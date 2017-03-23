@@ -12,6 +12,7 @@
 
 <script>
     $("#button1").on('click', function (e) {
+        //返回所有数据
         var url = "/spring-mvc/user/showUser";
         $.ajax(url, {
             type: "get",
@@ -47,7 +48,7 @@
 
         var url = "/spring-mvc/user/addUser";
         var data = {
-            id: 5,
+            id: 4,
             name: "王大狗",
             phone: "12345678910"
         };
