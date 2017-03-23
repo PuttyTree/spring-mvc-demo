@@ -22,14 +22,18 @@ public class UserServiceImpl implements UserService
         return this.userDao.selectAllUser();
     }
 
-    public User getUserByPhoneOrEmail(String emailOrPhone, Short state)
+    public User getUserByPhoneOrEmail(String emailOrPhone)
     {
-        return this.userDao.selectUserByPhoneOrEmail(emailOrPhone,state);
+        return this.userDao.selectUserByPhoneOrEmail(emailOrPhone);
     }
 
-    public User getUserById(Long userId)
+    public User getUserById(int userId)
     {
         return this.userDao.selectUserById(userId);
+    }
+
+    public  int insert(int id,String name,String phone){
+        return this.userDao.insert(id,name,phone);
     }
 }
 

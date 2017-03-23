@@ -21,7 +21,6 @@ public class UserServiceImpl implements IUserService
         this.userDao = userDao;
     }
 
-
     public void saveUser()
     {
         User u1 = new User();

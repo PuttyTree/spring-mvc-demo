@@ -1,18 +1,25 @@
 package com.bkm.spring.controller;
 
 import com.bkm.spring.model.User;
+import com.bkm.spring.rest.ApiRequest;
+import com.bkm.spring.rest.ApiResponse;
+import com.bkm.spring.rest.ErrorCode;
 import com.bkm.spring.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.bkm.spring.gson.GsonEnumTypeAdapter;
 
 /**
  * Created by Zhangxq on 2016/7/15.
@@ -22,33 +29,68 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController
 {
-    private Logger log = Logger.getLogger(UserController.class);
+    private Logger logger = Logger.getLogger(UserController.class);
 
+    private Gson gson = new GsonBuilder().serializeNulls().registerTypeAdapter(ErrorCode.class, new GsonEnumTypeAdapter(ErrorCode.SUCCESS)).setDateFormat("yyyy-MM-dd HH:mm:ss").create();
     @Resource
     private UserService userService;
 
-   /* private Logger log = Logger.getLogger(UserController.class);
-    @Resource
-    private UserService userService;
+    /* private Logger log = Logger.getLogger(UserController.class);
+     @Resource
+     private UserService userService;
 
-    @RequestMapping("/showUser")
-    public String showUser(HttpServletRequest request, Model model){
-        log.info("查询所有用户信息");
-        List<User> userList = userService.getAllUser();
-        model.addAttribute("userList",userList);
-        return "showUser";
-    }*/
+     @RequestMapping("/showUser")
+     public String showUser(HttpServletRequest request, Model model){
+         log.info("查询所有用户信息");
+         List<User> userList = userService.getAllUser();
+         model.addAttribute("userList",userList);
+         return "showUser";
+     }*/
     @RequestMapping("/showUser")
     @ResponseBody
-    public String showUser(Model model){
-        try{
+    public Map showUser(Model model)
+    {
+        Map<String, Object> map = new HashMap<String, Object>();
+        try
+        {
             List<User> list = this.userService.getAllUsers();
-        /*Map<String,Object> map = new HashMap<String, Object>();*/
-            return "success";
+            map.put("status", 0);
+            map.put("data", list);
+            return map;
+        }
+        catch (Exception e)
+        {
 
-        }catch (Exception e){
+            logger.fatal(e);
+            logger.error(String.format("%s  %s ", ErrorCode.BIZ_ERROR.getMsg(), e.getMessage()));
+            map.put("status", -1);
             System.out.println(e);
-            return "failure";
+            return map;
+
+        }
+
+    }
+
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    public @ResponseBody ApiResponse addUser(User user)
+    {
+        try
+        {
+            if (user == null || user.getId() < 1)
+            {
+                return ApiResponse.fail(ErrorCode.INVALID_REQUEST_PARAMETER_COUNT,"不正确的ID");
+            }
+            int index = this.userService.insert(user.getId(), user.getName(), user.getPhone());
+            if (index < 1){
+                return ApiResponse.fail(ErrorCode.INVALID_REQUEST_PARAMETER_COUNT,"该ID号已存在");
+            }
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("index", index);
+            return ApiResponse.success(map).setMsg(new String[]{"添加数据成功"});
+        }
+        catch (Exception e)
+        {
+            return ApiResponse.fail(ErrorCode.BIZ_ERROR,e.getMessage());
 
         }
 

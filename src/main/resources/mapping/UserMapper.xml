@@ -4,10 +4,10 @@
 
     <resultMap id="UserBaseMap" type="com.bkm.spring.model.User">
         <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
-        <result column="user_phone" property="userPhone" jdbcType="VARCHAR"/>
-        <result column="user_email" property="userEmail" jdbcType="VARCHAR"/>
-        <result column="user_pwd" property="userPwd" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="pwd" property="pwd" jdbcType="VARCHAR"/>
         <result column="pwd_salt" property="pwdSalt" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="DATE"/>
         <result column="modify_time" property="modifyTime" jdbcType="DATE"/>
@@ -21,12 +21,25 @@
 
     <select id="selectUserByPhoneOrEmail" resultMap="UserBaseMap">
         SELECT * FROM t_user
-        WHERE user_email = #{emailOrPhone} OR user_phone = #{emailOrPhone}
-        AND user_state = #{state}
+        WHERE email = #{emailOrPhone} OR phone = #{emailOrPhone}
     </select>
 
     <select id="selectAllUser" resultMap="UserBaseMap">
         SELECT * FROM t_user
     </select>
+
+    <insert id="insert" parameterType="com.bkm.spring.model.User">
+        <![CDATA[
+        insert into
+        t_user(id,name,phone)
+        values (#{id},#{name},#{phone})
+    ]]>
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+
+            <!-- mysql使用select last_insert_id();获取插入的主键 -->
+            select last_insert_id();
+        </selectKey>
+    </insert>
+
 
 </mapper>

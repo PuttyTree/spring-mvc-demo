@@ -13,9 +13,12 @@ import java.util.List;
 public interface UserDao
 {
     //@Param是一个注解，表示传进去的参数名字，在xml当中通过@Param括号里面的名字，可以获取到传进去的参数
-    User selectUserById(@Param("userId") Long userId);
+    User selectUserById(@Param("id") int id);
 
-    User selectUserByPhoneOrEmail(@Param("emailOrPhone") String emailOrPhone, @Param("state") Short state);
+    User selectUserByPhoneOrEmail(@Param("emailOrPhone") String emailOrPhone);
 
     List<User> selectAllUser();
+
+    int insert(@Param("id") int id,@Param("name") String name,@Param("phone") String phone);
+
 }

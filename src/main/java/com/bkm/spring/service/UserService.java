@@ -13,8 +13,10 @@ public interface UserService
 {
     List<User> getAllUsers();
 
-    User getUserByPhoneOrEmail(String emailOrPhone, Short state);
+    User getUserByPhoneOrEmail(String emailOrPhone);
 
-    User getUserById(Long userId);
+    User getUserById(int id);
+
+    int insert(int id,String name,String phone);
 }
 
