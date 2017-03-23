@@ -3,6 +3,8 @@ package com.bkm.spring.service.impl;
 import com.bkm.spring.dao.UserDao;
 import com.bkm.spring.model.User;
 import com.bkm.spring.service.UserService;
+import com.bkm.spring.tuser.entity.TUser;
+import com.bkm.spring.tuser.mapper.TUserMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,15 +24,20 @@ public class UserServiceImpl implements UserService
         return this.userDao.selectAllUser();
     }
 
-    public User getUserByPhoneOrEmail(String emailOrPhone, Short state)
+    public User getUserByPhoneOrEmail(String emailOrPhone)
     {
-        return this.userDao.selectUserByPhoneOrEmail(emailOrPhone,state);
+        return this.userDao.selectUserByPhoneOrEmail(emailOrPhone);
     }
 
-    public User getUserById(Long userId)
+    public User getUserById(int userId)
     {
         return this.userDao.selectUserById(userId);
     }
+
+    public  int insert(int id,String name,String phone){
+        return this.userDao.insert(id,name,phone);
+    }
+
 }
 
 
