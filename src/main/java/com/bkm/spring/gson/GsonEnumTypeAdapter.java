@@ -14,7 +14,6 @@ public class GsonEnumTypeAdapter<E> implements JsonSerializer<E>, JsonDeserializ
 		if (null != src && src instanceof GsonEnum) {
 			return ((GsonEnum) src).serialize();
 		}
-
 		return null;
 	}
 	public E deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException

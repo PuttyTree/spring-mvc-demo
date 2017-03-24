@@ -34,19 +34,15 @@ public class UserController
     private UserService userService;
 
     @RequestMapping("/showUser")
-    public @ResponseBody Map showUser(){
-        Map<String, Object> map = new HashMap<String, Object>();
+    public @ResponseBody ApiResponse showUser(){
         try{
             List<User> list = this.userService.getAllUsers();
-            map.put("status", 0);
-            map.put("data", list);
-            return map;
+            return ApiResponse.success(list).setMsg(new String[]{"获取数据成功"});
         }
         catch (Exception e){
             logger.fatal(e);
             logger.error(String.format("%s  %s ", ErrorCode.BIZ_ERROR.getMsg(), e.getMessage()));
-            map.put("status", -1);
-            return map;
+            return ApiResponse.fail(ErrorCode.BIZ_ERROR,e.getMessage());
         }
 
     }

@@ -6,6 +6,8 @@ public class ApiResponse<T> {
 
 	private ErrorCode status = ErrorCode.SUCCESS;
 
+	public  String name;
+
 	private T data;
 
 	private String[] msg;
