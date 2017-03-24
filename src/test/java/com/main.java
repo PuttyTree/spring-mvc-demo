@@ -3,9 +3,7 @@ package com;
 import com.bkm.spring.tuser.entity.TUser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.test.dao.IUserDao;
-import com.test.model.User;
-import com.test.service.IUserService;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
