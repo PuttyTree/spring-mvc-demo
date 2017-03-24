@@ -30,7 +30,6 @@ public class User implements Serializable
     public void setAge(Integer age ){
         this.age = age;
     }
-    //setter getter 略
     public String toString() {
         return "User [id=" + id + ", name=" + name + ", age=" + age + "]";
     }

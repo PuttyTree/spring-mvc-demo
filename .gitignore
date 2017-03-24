@@ -13,6 +13,6 @@
 
 # Maven
 log/
+Logs/
 target/
 classes/
-logs/
