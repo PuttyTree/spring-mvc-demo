@@ -167,6 +167,6 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>spring-mybatis</finalName>
+        <finalName>spring-mvc-app</finalName>
     </build>
 </project>
