@@ -75,6 +75,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
+
+        <!--spring -date-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+        </dependency>
         <!-- 添加mybatis依赖 -->
         <dependency>
             <groupId>org.mybatis</groupId>
