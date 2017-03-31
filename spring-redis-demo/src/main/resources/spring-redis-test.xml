@@ -35,5 +35,6 @@
           class="org.springframework.data.redis.core.RedisTemplate"
           p:connection-factory-ref="jedisConnFactory"/>
 
+    <bean id="userDao" class="com.bkm.redis.dao.impl.UserDaoImpl" />
 
 </beans>

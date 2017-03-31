@@ -1,8 +1,8 @@
 package com.bkm.redis.dao.impl;
 
 import com.bkm.redis.dao.AbstractBaseRedisDao;
-import com.bkm.redis.dao.IUserDao;
-import com.bkm.redis.model.User;
+import com.bkm.redis.dao.UserDao;
+import com.bkm.model.User;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UserDaoImpl extends AbstractBaseRedisDao<String, User> implements IUserDao
+public class UserDaoImpl extends AbstractBaseRedisDao<String, User> implements UserDao
 {
     public boolean add(final User user) {
         boolean result = this.redisTemplate.execute(new RedisCallback<Boolean>() {
@@ -29,12 +29,7 @@ public class UserDaoImpl extends AbstractBaseRedisDao<String, User> implements I
         return result;
     }
 
-    /**
-     * 批量新增 使用pipeline方式
-     *<br>------------------------------<br>
-     *@param list
-     *@return
-     */
+    //批量新增 使用pipeline方式
     public boolean add(final List<User> list) {
         Assert.notEmpty(list);
         boolean result = redisTemplate.execute(new RedisCallback<Boolean>() {
@@ -52,32 +47,19 @@ public class UserDaoImpl extends AbstractBaseRedisDao<String, User> implements I
         return result;
     }
 
-    /**
-     * 删除
-     * <br>------------------------------<br>
-     * @param key
-     */
+     //删除
     public void delete(String key) {
         List<String> list = new ArrayList<String>();
         list.add(key);
         delete(list);
     }
 
-    /**
-     * 删除多个
-     * <br>------------------------------<br>
-     * @param keys
-     */
+     //删除多个
     public void delete(List<String> keys) {
         redisTemplate.delete(keys);
     }
 
-    /**
-     * 修改
-     * <br>------------------------------<br>
-     * @param user
-     * @return
-     */
+     //修改
     public boolean update(final User user) {
         String key = user.getId();
         if (get(key) == null) {
@@ -96,12 +78,7 @@ public class UserDaoImpl extends AbstractBaseRedisDao<String, User> implements I
         return result;
     }
 
-    /**
-     * 通过key获取
-     * <br>------------------------------<br>
-     * @param keyId
-     * @return
-     */
+     //通过key获取
     public User get(final String keyId) {
         User result = redisTemplate.execute(new RedisCallback<User>() {
             public User doInRedis(RedisConnection connection)

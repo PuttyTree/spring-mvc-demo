@@ -20,7 +20,7 @@
             <property name="maxActive" value="20" />
         </bean>-->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    <property name="location" value="classpath:jdbc.properties"/>
+    <property name="location" value="classpath:props/jdbc.properties"/>
 </bean>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
