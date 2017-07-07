@@ -1,31 +1,32 @@
 package com;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
+import com.google.common.base.Objects;
+
+import com.google.common.collect.*;
 import org.junit.Test;
 
-import java.util.HashSet;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
+
 
 /**
  * Created by yongli.chen on 2017/7/7.
  */
-public class main
-{
+public class main {
     @Test
-    public void testSet()
-    {
-        Set<Integer> busRpodTpKeySet = Sets.newHashSet();
-        busRpodTpKeySet.add(1);
-        busRpodTpKeySet.add(2);
-        busRpodTpKeySet.add(3);
-        busRpodTpKeySet.add(4);
-
-        List<Integer> list = Lists.newArrayList(busRpodTpKeySet.iterator());
-        System.out.println(list);
-
-
+    public void testSet() {
+        ImmutableList<String> imList = ImmutableList.of("peida", "jerry", "harry", "lisa", "jerry");
+        System.out.println("imList：" + imList);
+        ImmutableSortedSet<String> imSortList = ImmutableSortedSet.copyOf(imList);
+        System.out.println("imSortList：" + imSortList);
+        System.out.println("imSortList as list：" + imSortList.asList());
     }
 
 }
+
+
+
+
