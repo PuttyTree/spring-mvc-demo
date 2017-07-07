@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by yongli.chen on 2017/7/7.
  */
-public class main {
+public class MainTest {
     @Test
     public void testSet() {
         ImmutableList<String> imList = ImmutableList.of("peida", "jerry", "harry", "lisa", "jerry");
