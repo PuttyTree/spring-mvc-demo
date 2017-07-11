@@ -13,7 +13,7 @@
 <script>
     $("#button1").on('click', function (e) {
         //返回所有数据
-        var url = "/spring-mvc/user/showUser";
+        var url = "/spring-mvc/user/list";
         $.ajax(url, {
             type: "get",
             success: function (res) {
@@ -46,9 +46,9 @@
     });
     $("#button2").on('click', function (e) {
 
-        var url = "/spring-mvc/user/addUser";
+        var url = "/spring-mvc/user/add";
         var data = {
-            id: 4,
+            id: 15,
             name: "王大狗",
             phone: "12345678910"
         };

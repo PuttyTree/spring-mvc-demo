@@ -5,6 +5,7 @@ import com.bkm.spring.rest.ApiRequest;
 import com.bkm.spring.rest.ApiResponse;
 import com.bkm.spring.rest.ErrorCode;
 import com.bkm.spring.service.UserService;
+import com.bkm.spring.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,43 +28,42 @@ import com.bkm.spring.gson.GsonEnumTypeAdapter;
 
 @Controller
 @RequestMapping("/user")
-public class UserController
-{
-    private Logger logger = Logger.getLogger(UserController.class);
-    @Resource
-    private UserService userService;
+public class UserController {
+	private Logger logger = Logger.getLogger(UserController.class);
+	@Resource
+	private UserService userService;
 
-    @RequestMapping("/showUser")
-    public @ResponseBody ApiResponse showUser(){
-        try{
-            List<User> list = this.userService.getAllUsers();
-            return ApiResponse.success(list).setMsg(new String[]{"获取数据成功"});
-        }
-        catch (Exception e){
-            logger.fatal(e);
-            logger.error(String.format("%s  %s ", ErrorCode.BIZ_ERROR.getMsg(), e.getMessage()));
-            return ApiResponse.fail(ErrorCode.BIZ_ERROR,e.getMessage());
-        }
+	@RequestMapping(value = "/list")
+	public @ResponseBody
+	ApiResponse showUser() {
+		try {
+			List<User> list = this.userService.getAllUsers();
+			return ApiResponse.success(list).setMsg(new String[]{"获取数据成功"});
+		} catch (Exception e) {
+			logger.fatal(e);
+			logger.error(String.format("%s  %s ", ErrorCode.BIZ_ERROR.getMsg(), e.getMessage()));
+			return ApiResponse.fail(ErrorCode.BIZ_ERROR, e.getMessage());
+		}
 
-    }
+	}
 
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public @ResponseBody ApiResponse addUser(User user){
-        try{
-            if (user == null || user.getId() < 1){
-                return ApiResponse.fail(ErrorCode.INVALID_REQUEST_PARAMETER_COUNT,"不正确的ID");
-            }
-            int index = this.userService.insert(user.getId(), user.getName(), user.getPhone());
-            if (index < 1){
-                return ApiResponse.fail(ErrorCode.INVALID_REQUEST_PARAMETER_COUNT,"该ID号已存在");
-            }
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("index", index);
-            return ApiResponse.success(map).setMsg(new String[]{"添加数据成功"});
-        }
-        catch (Exception e){
-            return ApiResponse.fail(ErrorCode.BIZ_ERROR,e.getMessage());
-        }
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public @ResponseBody
+	ApiResponse addUser(User user) {
+		try {
+			if (user == null || user.getId() < 1) {
+				return ApiResponse.fail(ErrorCode.INVALID_REQUEST_PARAMETER_COUNT, "不正确的ID");
+			}
+			int index = this.userService.insert(user.getId(), user.getName(), user.getPhone());
+			if (index < 1) {
+				return ApiResponse.fail(ErrorCode.INVALID_REQUEST_PARAMETER_COUNT, "该ID号已存在");
+			}
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("index", index);
+			return ApiResponse.success(map).setMsg(new String[]{"添加数据成功"});
+		} catch (Exception e) {
+			return ApiResponse.fail(ErrorCode.BIZ_ERROR, e.getMessage());
+		}
 
-    }
+	}
 }

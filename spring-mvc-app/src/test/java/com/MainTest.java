@@ -1,28 +1,38 @@
 package com;
 
-import com.google.common.base.Objects;
+import com.bkm.spring.model.User;
+import com.bkm.spring.service.HelloWorldService;
+import com.bkm.spring.service.UserService;
 
-import com.google.common.collect.*;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import javax.annotation.Resource;
+
 import java.util.List;
 
 
 /**
  * Created by yongli.chen on 2017/7/7.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {
+    "classpath:application-test.xml"
+})
 public class MainTest {
+    @Autowired
+    HelloWorldService helloWorldService;
+//    @Resource
+//    UserService userService;
+    
     @Test
     public void testSet() {
-        ImmutableList<String> imList = ImmutableList.of("peida", "jerry", "harry", "lisa", "jerry");
-        System.out.println("imList：" + imList);
-        ImmutableSortedSet<String> imSortList = ImmutableSortedSet.copyOf(imList);
-        System.out.println("imSortList：" + imSortList);
-        System.out.println("imSortList as list：" + imSortList.asList());
+        helloWorldService.save("zhang san");
+        //List<User> list = userService.getAllUsers();
     }
 
 }
