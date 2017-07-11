@@ -4,6 +4,7 @@ import com.bkm.spring.model.User;
 import com.bkm.spring.service.HelloWorldService;
 import com.bkm.spring.service.UserService;
 
+import com.bkm.spring.service.impl.HelloWorldServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +24,13 @@ import java.util.List;
 @ContextConfiguration(locations = {
     "classpath:application-test.xml"
 })
-public class MainTest {
+public class AopTest {
     @Autowired
     HelloWorldService helloWorldService;
-//    @Resource
-//    UserService userService;
-    
+
     @Test
     public void testSet() {
         helloWorldService.save("zhang san");
-        //List<User> list = userService.getAllUsers();
     }
 
 }

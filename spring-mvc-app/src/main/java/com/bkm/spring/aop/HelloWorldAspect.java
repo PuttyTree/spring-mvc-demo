@@ -2,6 +2,8 @@ package com.bkm.spring.aop;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.stereotype.Component;
+
 /**
  * Created by yongli.chen on 2017/7/11.
  */
@@ -9,15 +11,9 @@ import org.aspectj.lang.annotation.*;
 
 
 @Aspect
+@Component
 public class HelloWorldAspect {
-	/*//前置通知
-	public void beforeAdvice() {
-		System.out.println("===========before advice");
-	}
-	//后置最终通知
-	public void afterFinallyAdvice() {
-		System.out.println("===========after finally advice");
-	}*/
+
 	@Pointcut("execution(* com.bkm.spring.service.impl.HelloWorldServiceImpl.*(..))")
 	private void anyMethod(){}//定义一个切入点
 
