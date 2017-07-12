@@ -1,5 +1,3 @@
-package com;
-
 import com.bkm.spring.model.User;
 import com.bkm.spring.service.HelloWorldService;
 import com.bkm.spring.service.UserService;

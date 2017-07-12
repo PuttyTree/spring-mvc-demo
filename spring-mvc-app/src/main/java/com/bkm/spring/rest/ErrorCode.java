@@ -3,7 +3,7 @@ package com.bkm.spring.rest;
 import com.bkm.spring.gson.GsonEnum;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import org.apache.commons.lang.StringUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.Map;
 
