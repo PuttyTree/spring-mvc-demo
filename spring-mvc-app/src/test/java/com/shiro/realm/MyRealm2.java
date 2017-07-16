@@ -18,12 +18,7 @@ import org.apache.shiro.util.ByteSource;
  * <p>Version: 1.0
  */
 public class MyRealm2 extends AuthorizingRealm {
-    private PasswordService passwordService;
-
-    public void setPasswordService(PasswordService passwordService) {
-        this.passwordService = passwordService;
-    }
-
+   
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         return null;
@@ -37,12 +32,10 @@ public class MyRealm2 extends AuthorizingRealm {
         String salt2 = "0072273a5d87322163795118fdd7c45e";
         //String password = "be320beca57748ab9632c4121ccac0db"; //加密后的密码
         String algorithmName = "md5";
-        //String password = "123";
         String salt1 = username;
-        //salt2 = new SecureRandomNumberGenerator().nextBytes().toHex();
         int hashIterations = 2; //hash的迭代次数
 
-        SimpleHash hash = new SimpleHash(algorithmName, password, salt2, hashIterations);
+        SimpleHash hash = new SimpleHash(algorithmName, password, username + salt2, hashIterations);
         String encodedPassword = hash.toHex();
 
 
