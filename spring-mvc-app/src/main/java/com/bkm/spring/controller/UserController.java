@@ -54,7 +54,8 @@ public class UserController {
 			if (user == null || user.getId() < 1) {
 				return ApiResponse.fail(ErrorCode.INVALID_REQUEST_PARAMETER_COUNT, "不正确的ID");
 			}
-			int index = this.userService.insert(user.getId(), user.getName(), user.getPhone());
+
+			int index = this.userService.insert(user);
 			if (index < 1) {
 				return ApiResponse.fail(ErrorCode.INVALID_REQUEST_PARAMETER_COUNT, "该ID号已存在");
 			}

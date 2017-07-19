@@ -22,7 +22,7 @@
         <!-- 配置获取连接等待超时的时间 -->
         <!--<property name="maxWait" value="60000" />-->
         <!--<property name="maxIdle" value="15"/>-->
-        <!--     <property name="maxActive" value="20"/>
+        <!-- <property name="maxActive" value="20"/>
              <property name="validationQuery" value="select 1;"/>
              <property name="testOnBorrow" value="false"/>
              <property name="testWhileIdle" value="true"/>

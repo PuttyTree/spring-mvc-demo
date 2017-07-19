@@ -1,3 +1,5 @@
+import com.bkm.spring.dao.RolePermissionMapper;
+import com.bkm.spring.model.RolePermissionKey;
 import com.bkm.spring.model.User;
 import com.bkm.spring.service.HelloWorldService;
 import com.bkm.spring.service.UserService;
@@ -26,9 +28,21 @@ public class AopTest {
     @Autowired
     HelloWorldService helloWorldService;
 
+    @Resource
+    private RolePermissionMapper rolePermissionMapper;
+
     @Test
     public void testSet() {
         helloWorldService.save("zhang san");
+    }
+
+    @Test
+    public void rolePermissionTest(){
+
+
+        RolePermissionKey key = new RolePermissionKey();
+        key.setPermissionId(1L).setRoleId(1L);
+        int count = rolePermissionMapper.count(key);
     }
 
 }

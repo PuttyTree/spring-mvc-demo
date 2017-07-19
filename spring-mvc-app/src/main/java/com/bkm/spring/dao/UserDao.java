@@ -1,24 +1,34 @@
 package com.bkm.spring.dao;
 
+
 import com.bkm.spring.model.User;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
- * Created by Administrator on 2017/3/19.
+ * <p>User: Zhang Kaitao
+ * <p>Date: 14-1-28
+ * <p>Version: 1.0
  */
-@Repository
-public interface UserDao
-{
-    //@Param是一个注解，表示传进去的参数名字，在xml当中通过@Param括号里面的名字，可以获取到传进去的参数
-    User selectUserById(@Param("id") int id);
+public interface UserDao {
 
-    User selectUserByPhoneOrEmail(@Param("emailOrPhone") String emailOrPhone);
+    public User createUser(User user);
+    public void updateUser(User user);
+    public void deleteUser(Long userId);
 
-    List<User> selectAllUser();
+    public void correlationRoles(Long userId, Long... roleIds);
+    public void uncorrelationRoles(Long userId, Long... roleIds);
 
-    int insert(@Param("id") int id,@Param("name") String name,@Param("phone") String phone);
+    User findOne(Long userId);
 
+    User findByUsername(String username);
+
+    Set<String> findRoles(String username);
+
+    Set<String> findPermissions(String username);
+
+    public List<User> getAllUsers();
+    
+    public int insert(User user);
 }
