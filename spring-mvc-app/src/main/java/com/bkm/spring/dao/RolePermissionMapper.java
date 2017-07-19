@@ -9,5 +9,5 @@ public interface RolePermissionMapper {
 
     int insertSelective(RolePermissionKey record);
 
-    int count(RolePermissionKey record);
+
 }

@@ -41,7 +41,8 @@ public class AopTest {
 
 
         RolePermissionKey key = new RolePermissionKey();
-        key.setPermissionId(1L).setRoleId(1L);
+        key.setPermissionId(1L);
+        key.setRoleId(1L);
         int count = rolePermissionMapper.count(key);
     }
 

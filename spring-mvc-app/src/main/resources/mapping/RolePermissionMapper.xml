@@ -38,5 +38,5 @@
         from sys_roles_permissions
         where role_id = #{roleId,jdbcType=BIGINT}
           and permission_id = #{permissionId,jdbcType=BIGINT}
-  </select>
+    </select>
 </mapper>

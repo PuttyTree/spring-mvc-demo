@@ -1,8 +1,8 @@
 package com.bkm.spring.service.impl;
 
-import com.bkm.spring.dao.UserDao;
-import com.bkm.spring.dao.UserMapper;
+import com.bkm.spring.dao.*;
 import com.bkm.spring.model.User;
+import com.bkm.spring.model.UserRoleKey;
 import com.bkm.spring.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +18,21 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
 	@Resource
 	private UserMapper userMapper;
+	@Resource
+	private UserMapext userMapext;
+
+	@Resource
+	private UserRoleMapper userRoleMapper;
+
+	@Resource
+	private UserRoleMapext userRoleMapext;
 
 
 	//private UserDao userDao = new UserDaoImpl();
 	private PasswordHelper passwordHelper = new PasswordHelper();
 
 	public List<User> getAllUsers() {
-
-		return userMapper.getAllUsers();
+		return userMapext.getAllUsers();
 	}
 
 	/**
@@ -33,10 +40,10 @@ public class UserServiceImpl implements UserService {
 	 *
 	 * @param user
 	 */
-	public User createUser(User user) {
+	public int createUser(User user) {
 		//加密密码
 		passwordHelper.encryptPassword(user);
-		return userMapper.createUser(user);
+		return userMapper.insert(user);
 	}
 
 	public int insert(User user) {
@@ -51,10 +58,10 @@ public class UserServiceImpl implements UserService {
 	 * @param newPassword
 	 */
 	public void changePassword(Long userId, String newPassword) {
-		User user = userMapper.findOne(userId);
+		User user = userMapper.selectByPrimaryKey(userId);
 		user.setPassword(newPassword);
 		passwordHelper.encryptPassword(user);
-		userMapper.updateUser(user);
+		userMapper.updateByPrimaryKey(user);
 	}
 
 	/**
@@ -64,7 +71,19 @@ public class UserServiceImpl implements UserService {
 	 * @param roleIds
 	 */
 	public void correlationRoles(Long userId, Long... roleIds) {
-		userMapper.correlationRoles(userId, roleIds);
+		if (roleIds == null || roleIds.length == 0) {
+			return;
+		}
+		for (Long roleId : roleIds) {
+
+			UserRoleKey key = new UserRoleKey();
+			key.setRoleId(roleId);
+			key.setUserId(userId);
+			if (userRoleMapext.count(key) < 1)
+				userRoleMapper.insert(key);
+		}
+
+		//userMapper.correlationRoles(userId, roleIds);
 	}
 
 
@@ -75,7 +94,20 @@ public class UserServiceImpl implements UserService {
 	 * @param roleIds
 	 */
 	public void uncorrelationRoles(Long userId, Long... roleIds) {
-		userMapper.uncorrelationRoles(userId, roleIds);
+		//userMapper.uncorrelationRoles(userId, roleIds);
+		if (roleIds == null || roleIds.length == 0) {
+			return;
+		}
+		for (Long roleId : roleIds) {
+			UserRoleKey key = new UserRoleKey();
+			key.setRoleId(roleId);
+			key.setUserId(userId);
+			if (userRoleMapext.count(key) > 0) {
+				userRoleMapper.deleteByPrimaryKey(key);
+			}
+		}
+
+
 	}
 
 	/**
@@ -85,7 +117,8 @@ public class UserServiceImpl implements UserService {
 	 * @return
 	 */
 	public User findByUsername(String username) {
-		return userMapper.findByUsername(username);
+		//return userMapper.findByUsername(username);
+		return userMapext.findByUsername(username);
 	}
 
 	/**
@@ -95,7 +128,7 @@ public class UserServiceImpl implements UserService {
 	 * @return
 	 */
 	public Set<String> findRoles(String username) {
-		return userMapper.findRoles(username);
+		return userMapext.findRoles(username);
 	}
 
 	/**
@@ -105,7 +138,7 @@ public class UserServiceImpl implements UserService {
 	 * @return
 	 */
 	public Set<String> findPermissions(String username) {
-		return userMapper.findPermissions(username);
+		return userMapext.findPermissions(username);
 	}
 
 }

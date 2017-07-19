@@ -5,24 +5,13 @@ import com.bkm.spring.model.User;
 import java.util.List;
 import java.util.Set;
 
-public interface UserMapper {
+/**
+ * Created by yongli.chen on 2017/7/19.
+ */
+public interface UserMapext {
+	List<User> getAllUsers();
 
-	//List<User> getAllUsers();
-
-	int deleteByPrimaryKey(Long id);
-
-	int insert(User record);
-
-	int insertSelective(User record);
-
-	User selectByPrimaryKey(Long id);
-
-	int updateByPrimaryKeySelective(User record);
-
-	int updateByPrimaryKey(User record);
-
-	//extension
-/*	public User createUser(User user);
+	public User createUser(User user);
 
 	public void updateUser(User user);
 
@@ -30,6 +19,11 @@ public interface UserMapper {
 
 	public void correlationRoles(Long userId, Long... roleIds);
 
+	/**
+	 * 移除用户-角色关系
+	 * @param userId
+	 * @param roleIds
+	 */
 	public void uncorrelationRoles(Long userId, Long... roleIds);
 
 	User findOne(Long userId);
@@ -38,5 +32,5 @@ public interface UserMapper {
 
 	Set<String> findRoles(String username);
 
-	Set<String> findPermissions(String username);*/
+	Set<String> findPermissions(String username);
 }

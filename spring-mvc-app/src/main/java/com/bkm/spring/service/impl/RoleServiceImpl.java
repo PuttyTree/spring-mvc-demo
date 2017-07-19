@@ -1,11 +1,8 @@
 package com.bkm.spring.service.impl;
 
-/*import com.github.zhangkaitao.shiro.chapter6.dao.RoleDao;
-import com.github.zhangkaitao.shiro.chapter6.dao.RoleDaoImpl;
-import com.github.zhangkaitao.shiro.chapter6.entity.Role;*/
-
 import com.bkm.spring.dao.RoleDao;
 import com.bkm.spring.dao.RoleMapper;
+import com.bkm.spring.dao.RolePermissionMapext;
 import com.bkm.spring.dao.RolePermissionMapper;
 import com.bkm.spring.model.Role;
 import com.bkm.spring.model.RolePermissionKey;
@@ -27,6 +24,8 @@ public class RoleServiceImpl implements RoleService {
 
 	@Resource
 	private RolePermissionMapper rolePermissionMapper;
+	@Resource
+	private RolePermissionMapext rolePermissionMapext;
 
 
 	public int createRole(Role role) {
@@ -55,7 +54,7 @@ public class RoleServiceImpl implements RoleService {
 		for (Long permissionId : permissionIds) {
 			RolePermissionKey key = new RolePermissionKey();
 			key.setRoleId(roleId).setPermissionId(permissionId);
-			if (rolePermissionMapper.count(key) < 1)
+			if (rolePermissionMapext.count(key) < 1)
 				rolePermissionMapper.insert(key);
 		}
 	}
