@@ -14,4 +14,41 @@
     delete from sys_permissions
   </delete>
 
+  <insert id="createPermission" parameterType="com.bkm.spring.model.Permission" >
+      insert into sys_permissions
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="id != null" >
+          id,
+        </if>
+        <if test="permission != null" >
+          permission,
+        </if>
+        <if test="description != null" >
+          description,
+        </if>
+        <if test="available != null" >
+          available,
+        </if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="id != null" >
+          #{id,jdbcType=BIGINT},
+        </if>
+        <if test="permission != null" >
+          #{permission,jdbcType=VARCHAR},
+        </if>
+        <if test="description != null" >
+          #{description,jdbcType=VARCHAR},
+        </if>
+        <if test="available != null" >
+          #{available,jdbcType=BIT},
+        </if>
+      </trim>
+    <selectKey resultType="java.lang.Long"  keyProperty="id" order="AFTER">
+      <!-- mysql使用select last_insert_id();获取插入的主键 -->
+      select last_insert_id();
+    </selectKey>
+
+  </insert>
+
 </mapper>

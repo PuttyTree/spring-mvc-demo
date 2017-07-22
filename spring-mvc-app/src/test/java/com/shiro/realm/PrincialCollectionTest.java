@@ -1,7 +1,8 @@
 package com.shiro.realm;
 
-import com.github.zhangkaitao.shiro.chapter6.BaseTest;
-import com.github.zhangkaitao.shiro.chapter6.entity.User;
+
+import com.bkm.spring.model.User;
+import com.shiro.BaseTest;
 import junit.framework.Assert;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;

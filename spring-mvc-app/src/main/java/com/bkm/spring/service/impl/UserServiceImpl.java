@@ -40,10 +40,10 @@ public class UserServiceImpl implements UserService {
 	 *
 	 * @param user
 	 */
-	public int createUser(User user) {
+	public Long createUser(User user) {
 		//加密密码
 		passwordHelper.encryptPassword(user);
-		return userMapper.insert(user);
+		return userMapext.createUser(user);
 	}
 
 	public int insert(User user) {

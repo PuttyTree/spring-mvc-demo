@@ -11,7 +11,7 @@ import com.bkm.spring.model.Role;
 public interface RoleService {
 
 
-    public int createRole(Role role);
+    public Long createRole(Role role);
     public void deleteRole(Long roleId);
 
     /**

@@ -12,6 +12,45 @@
         id, username, password, salt, locked
     </sql>
 
+    <insert id="createUser" parameterType="com.bkm.spring.model.User">
+        insert into sys_users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="salt != null">
+                salt,
+            </if>
+            <if test="locked != null">
+                locked,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="locked != null">
+                #{locked,jdbcType=BIT},
+            </if>
+        </trim>
+
+        <selectKey resultType="java.lang.Long"  keyProperty="id" order="AFTER">
+            select last_insert_id();
+        </selectKey>
+    </insert>
+
     <select id="getAllUsers" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
@@ -21,11 +60,19 @@
         select
         <include refid="Base_Column_List" />
         from sys_users
-        where username = #{username,jdbcType=BIGINT}
+        where username = #{username,jdbcType=VARCHAR}
     </select>
     <delete id="deleteAll">
-        DELETE FROM sys_users
+        delete from sys_users
     </delete>
+    <select id="findRoles" parameterType="java.lang.String" resultType="java.util.Map">
+       select role
+        from sys_users u, sys_roles r,sys_users_roles ur
+        where u.username=#{username,jdbcType=VARCHAR}
+              and u.id=ur.user_id
+              and r.id=ur.role_id
+
+    </select>
 
     
 

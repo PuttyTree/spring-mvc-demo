@@ -13,7 +13,7 @@ public interface UserMapext {
 
 	void deleteAll();
 
-	public User createUser(User user);
+	public Long createUser(User user);
 
 	public void updateUser(User user);
 
