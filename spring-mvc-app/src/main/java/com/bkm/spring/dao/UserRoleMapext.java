@@ -8,4 +8,6 @@ import com.bkm.spring.model.UserRoleKey;
 public interface UserRoleMapext {
 	
 	int count(UserRoleKey record);
+
+	void deleteAll();
 }

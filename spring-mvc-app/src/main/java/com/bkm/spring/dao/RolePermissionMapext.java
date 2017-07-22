@@ -7,4 +7,5 @@ import com.bkm.spring.model.RolePermissionKey;
  */
 public interface RolePermissionMapext {
 	int count(RolePermissionKey record);
+	void deleteAll();
 }

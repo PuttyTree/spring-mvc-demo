@@ -23,6 +23,9 @@
         from sys_users
         where username = #{username,jdbcType=BIGINT}
     </select>
+    <delete id="deleteAll">
+        DELETE FROM sys_users
+    </delete>
 
     
 

@@ -11,6 +11,8 @@ import java.util.Set;
 public interface UserMapext {
 	List<User> getAllUsers();
 
+	void deleteAll();
+
 	public User createUser(User user);
 
 	public void updateUser(User user);
