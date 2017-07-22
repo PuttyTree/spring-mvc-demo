@@ -1,6 +1,7 @@
 package com.bkm.spring.dao;
 
 import com.bkm.spring.model.Role;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by Administrator on 2017/7/22.

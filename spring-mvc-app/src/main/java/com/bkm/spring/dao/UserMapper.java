@@ -1,10 +1,10 @@
 package com.bkm.spring.dao;
 
 import com.bkm.spring.model.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Set;
-
 public interface UserMapper {
 
 	//List<User> getAllUsers();

@@ -6,9 +6,12 @@
         <id column="permission_id" property="permissionId" jdbcType="BIGINT"/>
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="com.bkm.spring.model.RolePermissionKey">
-    delete from sys_roles_permissions
-    where role_id = #{roleId,jdbcType=BIGINT}
-      and permission_id = #{permissionId,jdbcType=BIGINT}
+    DELETE
+    FROM
+        sys_roles_permissions
+    WHERE
+        role_id = #{roleId,jdbcType=BIGINT}
+    AND permission_id = #{permissionId,jdbcType=BIGINT}
   </delete>
     <insert id="insert" parameterType="com.bkm.spring.model.RolePermissionKey">
     insert into sys_roles_permissions (role_id, permission_id)
@@ -33,10 +36,5 @@
             </if>
         </trim>
     </insert>
-    <select id="count" parameterType="com.bkm.spring.model.RolePermissionKey" resultType="java.lang.Integer">
-        select count(1)
-        from sys_roles_permissions
-        where role_id = #{roleId,jdbcType=BIGINT}
-          and permission_id = #{permissionId,jdbcType=BIGINT}
-    </select>
+  
 </mapper>
