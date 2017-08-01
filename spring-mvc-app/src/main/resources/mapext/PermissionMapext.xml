@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bkm.spring.dao.PermissionMapext">
+    <resultMap id="BaseResultMap" type="com.bkm.spring.model.Permission">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="permission" property="permission" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="available" property="available" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, permission, description, available
+  </sql>
+    <delete id="deleteAll">
+        delete from sys_permissions
+    </delete>
+</mapper>
