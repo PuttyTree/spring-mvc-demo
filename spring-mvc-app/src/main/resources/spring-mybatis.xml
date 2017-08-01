@@ -10,7 +10,6 @@
                         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
-
     <!-- 配置数据源 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
@@ -18,20 +17,34 @@
         <property name="url" value="${jdbc.adb.master.url}"/>
         <property name="username" value="${jdbc.adb.master.username}"/>
         <property name="password" value="${jdbc.adb.master.password}"/>
-        <!--<property name="initialSize" value="10"/>-->
-        <!-- 配置获取连接等待超时的时间 -->
-        <!--<property name="maxWait" value="60000" />-->
-        <!--<property name="maxIdle" value="15"/>-->
-   <!--     <property name="maxActive" value="20"/>
-        <property name="validationQuery" value="select 1;"/>
-        <property name="testOnBorrow" value="false"/>
+        <property name="initialSize" value="10"/>
+        <!--配置获取连接等待超时的时间-->
+        <!-- <property name="maxWait" value="60000" />
+         <property name="maxIdle" value="15"/>
+         <property name="maxActive" value="20"/>
+         <property name="validationQuery" value="select 1;"/>
+         <property name="testOnBorrow" value="false"/>
+         <property name="testWhileIdle" value="true"/>
+         <property name="numTestsPerEvictionRun" value="10"/>
+         <property name="timeBetweenEvictionRunsMillis" value="10000"/>
+         <property name="minEvictableIdleTimeMillis" value="60000"/>
+         <property name="logAbandoned" value="true"/>
+         <property name="removeAbandoned" value="true"/>
+         <property name="removeAbandonedTimeout" value="180"/>-->
+        <property name="maxActive" value="20"/>
+        <property name="maxWait" value="60000"/>
+        <property name="minIdle" value="1"/>
+
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+
+        <property name="validationQuery" value="SELECT 'x'"/>
         <property name="testWhileIdle" value="true"/>
-        <property name="numTestsPerEvictionRun" value="10"/>
-        <property name="timeBetweenEvictionRunsMillis" value="10000"/>
-        <property name="minEvictableIdleTimeMillis" value="60000"/>
-        <property name="logAbandoned" value="true"/>
-        <property name="removeAbandoned" value="true"/>
-        <property name="removeAbandonedTimeout" value="180"/>-->
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="50"/>
 
     </bean>
 
@@ -39,16 +52,20 @@
     <!-- mybatis和spring完美整合，不需要mybatis的配置映射文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <!-- 自动扫描mapping.xml文件 -->
-        <property name="mapperLocations" value="classpath:mapping/*.xml"></property>
-    </bean>
+        <!-- 自动扫描mapping和mapext的xml文件 -->
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:mapping/*.xml</value>
+                <value>classpath:mapext/*.xml</value>
+            </list>
+        </property>
 
+    </bean>
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.bkm.spring.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
-
 
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

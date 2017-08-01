@@ -16,7 +16,7 @@ public interface UserService {
      * 创建用户
      * @param user
      */
-    public int createUser(User user);
+    public Long createUser(User user);
 
     /**
      * 修改密码

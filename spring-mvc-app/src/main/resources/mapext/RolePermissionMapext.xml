@@ -11,4 +11,7 @@
         where role_id = #{roleId,jdbcType=BIGINT}
           and permission_id = #{permissionId,jdbcType=BIGINT}
     </select>
+    <delete id="deleteAll">
+        DELETE FROM sys_roles_permissions
+    </delete>
 </mapper>

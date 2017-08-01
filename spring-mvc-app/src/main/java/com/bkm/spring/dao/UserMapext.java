@@ -1,6 +1,7 @@
 package com.bkm.spring.dao;
 
 import com.bkm.spring.model.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Set;
@@ -11,7 +12,9 @@ import java.util.Set;
 public interface UserMapext {
 	List<User> getAllUsers();
 
-	public User createUser(User user);
+	void deleteAll();
+
+	public Long createUser(User user);
 
 	public void updateUser(User user);
 

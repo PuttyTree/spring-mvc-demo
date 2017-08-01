@@ -22,9 +22,6 @@ import java.util.Map;
 
 import com.bkm.spring.gson.GsonEnumTypeAdapter;
 
-/**
- * Created by Zhangxq on 2016/7/15.
- */
 
 @Controller
 @RequestMapping("/user")

@@ -1,6 +1,7 @@
 package com.bkm.spring.dao;
 
 import com.bkm.spring.model.Role;
+import org.springframework.stereotype.Repository;
 
 public interface RoleMapper {
     int deleteByPrimaryKey(Long id);

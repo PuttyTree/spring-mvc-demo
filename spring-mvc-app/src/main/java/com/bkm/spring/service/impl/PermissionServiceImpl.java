@@ -1,5 +1,6 @@
 package com.bkm.spring.service.impl;
 
+import com.bkm.spring.dao.PermissionMapext;
 import com.bkm.spring.dao.PermissionMapper;
 import com.bkm.spring.model.Permission;
 import com.bkm.spring.service.PermissionService;
@@ -19,12 +20,15 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Resource
     private PermissionMapper permissionMapper;
+    @Resource
+    private PermissionMapext permissionMapext;
     //private PermissionDao permissionDao = new PermissionDaoImpl();
 
-    public int createPermission(Permission permission) {
+    public Long createPermission(Permission permission) {
+        long id = permissionMapext.createPermission(permission);
 
-        //return permissionDao.createPermission(permission);
-        return permissionMapper.insert(permission);
+        return new Long(id);
+        //return new Long(permissionMapper.insertSelective(permission));
     }
 
     public void deletePermission(Long permissionId) {

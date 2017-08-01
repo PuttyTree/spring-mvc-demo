@@ -9,6 +9,6 @@ import com.bkm.spring.model.Permission;
  * <p>Version: 1.0
  */
 public interface PermissionService {
-    public int createPermission(Permission permission);
+    public Long createPermission(Permission permission);
     public void deletePermission(Long permissionId);
 }

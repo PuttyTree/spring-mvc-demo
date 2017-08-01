@@ -1,7 +1,9 @@
 package com.bkm.spring.dao;
 
 import com.bkm.spring.model.Permission;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PermissionMapper {
     
     int deleteByPrimaryKey(Long id);
